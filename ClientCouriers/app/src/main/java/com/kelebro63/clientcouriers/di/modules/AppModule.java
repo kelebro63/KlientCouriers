@@ -4,14 +4,13 @@ package com.kelebro63.clientcouriers.di.modules;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.kelebro63.clientcouriers.App;
-import com.kelebro63.clientcouriers.BuildConfig;
+import com.kelebro63.clientcouriers.MyApp;
 import com.kelebro63.clientcouriers.R;
 import com.kelebro63.clientcouriers.api.ICouriersAPI;
+import com.kelebro63.clientcouriers.prefs.IPrefs;
+import com.kelebro63.clientcouriers.prefs.Prefs;
 import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Response;
 
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -25,9 +24,9 @@ import retrofit.converter.GsonConverter;
 
 @Module
 public class AppModule {
-    private final App app;
+    private final MyApp app;
 
-    public AppModule(App app) {
+    public AppModule(MyApp app) {
         this.app = app;
     }
 

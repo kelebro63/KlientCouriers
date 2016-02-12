@@ -16,6 +16,4 @@ public interface ICouriersAPI {
     @FormUrlEncoded
     @POST("/couriers/authentication/sms")
     Observable<AuthenticationResult> authorize(@Field("phone") String phone, @Field("sms_code") String smsCode);
-
-
 }

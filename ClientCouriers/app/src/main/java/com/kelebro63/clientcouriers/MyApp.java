@@ -3,20 +3,16 @@ package com.kelebro63.clientcouriers;
 import android.app.Application;
 import android.content.Context;
 
-import com.crashlytics.android.Crashlytics;
+import com.kelebro63.clientcouriers.di.components.AppComponent;
+import com.kelebro63.clientcouriers.di.components.DaggerAppComponent;
+import com.kelebro63.clientcouriers.di.modules.AppModule;
 
-import io.fabric.sdk.android.Fabric;
-import ru.aipmedia.couriers.di.components.AppComponent;
-import ru.aipmedia.couriers.di.components.DaggerAppComponent;
-import ru.aipmedia.couriers.di.modules.AppModule;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-
-public class App extends Application {
+public class MyApp extends Application {
 
     private AppComponent appComponent;
 
     public static AppComponent getAppComponent(Context context) {
-        return ((App) context.getApplicationContext()).appComponent;
+        return ((MyApp) context.getApplicationContext()).appComponent;
     }
 
     @Override

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ClientCouriers</string>
+    <string name="endpoint">http://api.sendfriend.ru</string>
 </resources>
