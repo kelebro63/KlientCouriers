@@ -1,5 +1,6 @@
 package com.kelebro63.clientcouriers.api;
 
+import com.kelebro63.clientcouriers.model.OrderResult;
 import com.kelebro63.clientcouriers.model.authorization.AuthenticationResult;
 
 import retrofit.http.Field;
@@ -14,6 +15,10 @@ public interface ICouriersAPI {
     Observable<Object> requestCode(@Field("phone") String phone);
 
     @FormUrlEncoded
-    @POST("/couriers/authentication/sms")
+    @POST("/clients/authentication/sms")
     Observable<AuthenticationResult> authorize(@Field("phone") String phone, @Field("sms_code") String smsCode);
+
+    @FormUrlEncoded
+    @POST("/orders")
+    Observable<OrderResult> createOrder(@Field("phone") String phone, @Field("sms_code") String smsCode);
 }

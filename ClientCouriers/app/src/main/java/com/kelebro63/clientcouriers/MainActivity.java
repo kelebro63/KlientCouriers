@@ -10,6 +10,7 @@ import com.kelebro63.clientcouriers.api.ICouriersAPI;
 import com.kelebro63.clientcouriers.base.BaseSubscriber;
 import com.kelebro63.clientcouriers.di.components.DaggerActivityComponent;
 import com.kelebro63.clientcouriers.di.modules.ActivityModule;
+import com.kelebro63.clientcouriers.model.authorization.AuthenticationResult;
 import com.kelebro63.clientcouriers.views.PhoneFormatter;
 
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnSendSMS)
     void authenticate() {
-        authorize(etPhone.getText().toString(), etPass.getText().toString(), new BaseSubscriber<Object>() {
+        authorize(etPhone.getText().toString(), etPass.getText().toString(), new BaseSubscriber<AuthenticationResult>() {
 
             @Override
             public void onStartImpl() {
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNextImpl(Object result) {
+            public void onNextImpl(AuthenticationResult result) {
                 String t = "";
             }
         });
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         subscribe(serverApi.requestCode(phone), subscriber);
     }
 
-    public void authorize(String phone, String sms, Subscriber<Object> subscriber) {
+    public void authorize(String phone, String sms, Subscriber<AuthenticationResult> subscriber) {
         subscribe(serverApi.authorize(phone, sms), subscriber);
     }
 
