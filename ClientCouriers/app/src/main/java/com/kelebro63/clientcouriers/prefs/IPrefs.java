@@ -10,4 +10,6 @@ public interface IPrefs {
     void setSessionKey(String sessionKey);
 
     boolean isOnline();
+
+    boolean isLoggedIn();
 }

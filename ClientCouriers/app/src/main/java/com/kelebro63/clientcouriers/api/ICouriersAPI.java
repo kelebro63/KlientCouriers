@@ -20,5 +20,5 @@ public interface ICouriersAPI {
 
     @FormUrlEncoded
     @POST("/orders")
-    Observable<OrderResult> createOrder(@Field("phone") String phone, @Field("sms_code") String smsCode);
+    Observable<OrderResult> createOrder(@Field("template_id") int templateId);
 }

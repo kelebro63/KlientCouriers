@@ -10,7 +10,9 @@ import com.kelebro63.clientcouriers.api.ICouriersAPI;
 import com.kelebro63.clientcouriers.base.BaseSubscriber;
 import com.kelebro63.clientcouriers.di.components.DaggerActivityComponent;
 import com.kelebro63.clientcouriers.di.modules.ActivityModule;
+import com.kelebro63.clientcouriers.model.OrderResult;
 import com.kelebro63.clientcouriers.model.authorization.AuthenticationResult;
+import com.kelebro63.clientcouriers.prefs.Prefs;
 import com.kelebro63.clientcouriers.views.PhoneFormatter;
 
 import java.util.ArrayList;
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Inject
     PhoneFormatter phoneFormatter;
+
+
+    Prefs prefs;
 
     @Nullable
     @Bind(R.id.btnAuth)
@@ -117,6 +122,33 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNextImpl(AuthenticationResult result) {
+                Prefs prefs = new Prefs(MainActivity.this);
+                prefs.setSessionKey(result.getSessionKey());
+            }
+        });
+    }
+
+    @OnClick(R.id.btnCreateOrder)
+    void createOrder() {
+        createOrder(9, new BaseSubscriber<OrderResult>() {
+
+            @Override
+            public void onStartImpl() {
+                String t = "";
+            }
+
+            @Override
+            public void onCompletedImpl() {
+                String t = "";
+            }
+
+            @Override
+            public void onErrorImpl(Throwable e) {
+
+            }
+
+            @Override
+            public void onNextImpl(OrderResult result) {
                 String t = "";
             }
         });
@@ -128,6 +160,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void authorize(String phone, String sms, Subscriber<AuthenticationResult> subscriber) {
         subscribe(serverApi.authorize(phone, sms), subscriber);
+    }
+
+    public void createOrder(int templateId, Subscriber<OrderResult> subscriber) {
+        subscribe(serverApi.createOrder(templateId), subscriber);
     }
 
     private void subscribe(Observable observable, Subscriber subscriber) {

@@ -7,7 +7,6 @@ import com.google.gson.GsonBuilder;
 import com.kelebro63.clientcouriers.MyApp;
 import com.kelebro63.clientcouriers.R;
 import com.kelebro63.clientcouriers.api.ICouriersAPI;
-import com.kelebro63.clientcouriers.prefs.IPrefs;
 import com.kelebro63.clientcouriers.prefs.Prefs;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -17,6 +16,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
@@ -46,21 +46,30 @@ public class AppModule {
     @Provides
     ICouriersAPI provideAPI(OkHttpClient client) {
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        final Prefs prefs = new Prefs(app);
         RestAdapter adapter = new RestAdapter.Builder().setClient(new OkClient(client))
                 .setEndpoint(app.getString(R.string.endpoint))
                 .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setRequestInterceptor(new RequestInterceptor() {
+                    @Override
+                    public void intercept(RequestFacade request) {
+                        if (prefs.isLoggedIn()) {
+                            request.addHeader("Authorization", String.format("token %s", prefs.getSessionKey()));
+                        }
+                    }
+                })
 //                .setRequestInterceptor(requestFacade -> {
 //                    if (prefs.isLoggedIn()) {
 //                        requestFacade.addHeader("Authorization", String.format("token %s", prefs.getSessionKey()));
 //                    }
 //                })
-            .setConverter(new GsonConverter(gson)).build();
+                .setConverter(new GsonConverter(gson)).build();
         return adapter.create(ICouriersAPI.class);
     }
 
-    @Singleton
-    @Provides
-    IPrefs providePrefs() {
-        return new Prefs(app);
-    }
+//    @Singleton
+//    @Provides
+//    IPrefs providePrefs() {
+//        return new Prefs(app);
+//    }
 }

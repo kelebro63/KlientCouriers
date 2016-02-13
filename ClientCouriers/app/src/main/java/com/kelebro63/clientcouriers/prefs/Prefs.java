@@ -7,9 +7,7 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 
-/**
- * Created by dtx12 on 24.09.2015.
- */
+
 public class Prefs implements IPrefs {
     private static final String SESSION_KEY = "session_key";
 
@@ -33,5 +31,10 @@ public class Prefs implements IPrefs {
     @Override
     public boolean isOnline() {
         return false;
+    }
+
+
+    public boolean isLoggedIn() {
+        return getSessionKey() != null;
     }
 }
