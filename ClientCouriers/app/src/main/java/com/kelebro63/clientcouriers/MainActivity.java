@@ -130,7 +130,22 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnCreateOrder)
     void createOrder() {
-        createOrder(9, "cash", new BaseSubscriber<OrderResult>() {
+        createOrder(9, "cash",
+                "тестовый заказ, не берите его пожалуйста",
+                5000,
+                "Тестовый пользователь",
+                "+7(927)028-96-60",
+                "56.34601",
+                "43.87218",
+                "Нижний Новгород, ул. Васенко, 4, ",
+                "Тестовый пользователь",
+                "+7(927)028-96-60",
+                "56.34601",
+                "43.87218",
+                "Нижний Новгород, ул. Калашникова, 3, ",
+                "тестовый заказ, не берите его пожалуйста",
+
+                new BaseSubscriber<OrderResult>() {
 
             @Override
             public void onStartImpl() {
@@ -162,8 +177,13 @@ public class MainActivity extends AppCompatActivity {
         subscribe(serverApi.authorize(phone, sms), subscriber);
     }
 
-    public void createOrder(int templateId, String paymentType, Subscriber<OrderResult> subscriber) {
-        subscribe(serverApi.createOrder(templateId, paymentType), subscriber);
+    public void createOrder(int templateId, String paymentType, String shopping_info, int maxPrice,
+                            String name_A, String phone_A, String latitude,String longitude, String locationDescription_A,
+                            String name_B, String phone_B, String latitude_B,String longitude_B,
+                            String locationDescription_B,String comment, Subscriber<OrderResult> subscriber) {
+        subscribe(serverApi.createOrder(templateId, paymentType, shopping_info, maxPrice,name_A,
+                 phone_A, latitude,longitude, locationDescription_A,
+                 name_B, phone_B, latitude_B,longitude_B, locationDescription_B, comment), subscriber);
     }
 
     private void subscribe(Observable observable, Subscriber subscriber) {
