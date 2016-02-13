@@ -20,5 +20,5 @@ public interface ICouriersAPI {
 
     @FormUrlEncoded
     @POST("/orders")
-    Observable<OrderResult> createOrder(@Field("template_id") int templateId);
+    Observable<OrderResult> createOrder(@Field("template_id") int templateId,  @Field("payment_type") String paymentType);
 }

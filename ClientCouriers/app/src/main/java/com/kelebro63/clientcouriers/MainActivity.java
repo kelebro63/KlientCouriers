@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnCreateOrder)
     void createOrder() {
-        createOrder(9, new BaseSubscriber<OrderResult>() {
+        createOrder(9, "cash", new BaseSubscriber<OrderResult>() {
 
             @Override
             public void onStartImpl() {
@@ -162,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
         subscribe(serverApi.authorize(phone, sms), subscriber);
     }
 
-    public void createOrder(int templateId, Subscriber<OrderResult> subscriber) {
-        subscribe(serverApi.createOrder(templateId), subscriber);
+    public void createOrder(int templateId, String paymentType, Subscriber<OrderResult> subscriber) {
+        subscribe(serverApi.createOrder(templateId, paymentType), subscriber);
     }
 
     private void subscribe(Observable observable, Subscriber subscriber) {
