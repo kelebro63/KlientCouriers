@@ -39,7 +39,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="number"
         android:ems="10"
         android:id="@+id/etPass"
         android:layout_below="@+id/btnSendSMS"
