@@ -31,6 +31,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        prod {
+            applicationId "ru.aipmedia.couriers"
+            buildConfigField "String", "API_ENDPOINT", "\"http://api.sendfriend.ru\""
+        }
+        stage {
+            applicationId "ru.aipmedia.couriers.stage"
+            buildConfigField "String", "API_ENDPOINT", "\"http://cour-stage.aipmedia.ru/\""
+        }
+    }
 }
 
 dependencies {

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.kelebro63.clientcouriers.api.ICouriersAPI;
 import com.kelebro63.clientcouriers.base.BaseSubscriber;
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCompletedImpl() {
-                String t = "";
+                Toast.makeText(MainActivity.this, "запрос на авторизацию прошел", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCompletedImpl() {
-                String t = "";
+                Toast.makeText(MainActivity.this, "авторизовались", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCompletedImpl() {
-                String t = "";
+                Toast.makeText(MainActivity.this, "заявка создана!", Toast.LENGTH_LONG).show();
             }
 
             @Override

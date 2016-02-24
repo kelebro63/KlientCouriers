@@ -4,8 +4,8 @@ package com.kelebro63.clientcouriers.di.modules;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kelebro63.clientcouriers.BuildConfig;
 import com.kelebro63.clientcouriers.MyApp;
-import com.kelebro63.clientcouriers.R;
 import com.kelebro63.clientcouriers.api.ICouriersAPI;
 import com.kelebro63.clientcouriers.prefs.Prefs;
 import com.squareup.okhttp.OkHttpClient;
@@ -48,7 +48,7 @@ public class AppModule {
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
         final Prefs prefs = new Prefs(app);
         RestAdapter adapter = new RestAdapter.Builder().setClient(new OkClient(client))
-                .setEndpoint(app.getString(R.string.endpoint))
+                .setEndpoint(BuildConfig.API_ENDPOINT)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setRequestInterceptor(new RequestInterceptor() {
                     @Override
